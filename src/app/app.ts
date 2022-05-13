@@ -31,12 +31,10 @@ app.get('/search/:title',  (req: any, res: any) => {
     .then((movies: any []) => {
      //  console log the movies title
      res.json(movies);
+    //  get only the title of the movie
+    var eachTitle = (movies.map(movie => movie.title));
     //  create a slector for the title of the movie
 
-    //  res.render('index.ejs', {
-    //     //  
-    //         movies: movies 
-    //     });
          
      })    
 })

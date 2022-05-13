@@ -11,7 +11,7 @@ async function searchMovies(searchTerm : any){
     .then(response => response.text())
 
     .then(body => {
-        const movies: any[] | PromiseLike<any[]> = [];
+        const movies: unknown[] | PromiseLike<string[]> = [];
         const $ = cheerio.load(body);
         // get all the images from the page
         const $images = $('td a img');
