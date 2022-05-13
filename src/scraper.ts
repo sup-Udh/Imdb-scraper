@@ -11,41 +11,44 @@ async function searchMovies(searchTerm : any){
     .then(response => response.text())
 
     .then(body => {
-        const movies = [];
+        const movies: any[] | PromiseLike<any[]> = [];
         const $ = cheerio.load(body);
         // get all the images from the page
         const $images = $('td a img');
         // console logging only the src of the images
 
         var $eachImage = $('td a img').each((i: any, element: any) => {
-            movies.push($images.attr('src'))
+            // movies.push($images.attr('src'))
         })
          
         var $eachtitle = $('td.result_text a').each((i: any, title: any) => {
-            movies.push(title.children[0].data);
+
+            var $eachrating = $('td.result_text span[itemprop="ratingValue"]').each((i: any, rating: any) => {
+                var $eachid = $('td.result_text a').each((i: any, id: any) => {
+                    movies.push({
+                        title: title.children[0].data,
+                        imdbID: id.attribs.href.split('/')[2],
+                        // each rating: 
+                        rating: rating.children[0].data
+                        
+                    })
+                })
+                // movies.push(rating.children[0].data);
+            })
+            
+            // add keys to each movie object
+            
         })
         // lol making a video for my project ;0)))))
         // show imdb id for each movie
-        var $eachid = $('td.result_text a').each((i: any, id: any) => {
-            movies.push(id.attribs.href.split('/')[2]);
-        })
+  
 
         // get the rating for each movie
         var $eachrating = $('td.result_text span[itemprop="ratingValue"]').each((i: any, rating: any) => {
-            movies.push(rating.children[0].data);
+            // movies.push(rating.children[0].data);
         })
 
-        const movie = {
-            title: $eachtitle.text(), 
-            imdbID: $eachid.text(),
-            rating: $eachrating.text(),
-            images: $eachImage.attr('src')
-        
-        }
-        movies.push(movie);
-
         return movies
-    
     })
     
     
