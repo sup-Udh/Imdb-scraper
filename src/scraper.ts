@@ -18,37 +18,30 @@ async function searchMovies(searchTerm : any){
         // console logging only the src of the images
 
         var $eachImage = $('td a img').each((i: any, element: any) => {
+            var $eachid = $('td.result_text a').each((i: any, id: any) => {
+                // movies.push(id.attribs.href.split('/')[2]);
+    
+                var $eachtitle = $('td.result_text a').each((i: any, title: any) => {
+                    // add keys to each movie object
+                    movies.push({
+                        title: title.children[0].data,
+                        ImdbID : id.attribs.href.split('/')[2],
+                        image: $images.attr('src')
+                    })
+                    // movies.push(title.children[0].data);
+                })
+            })
             // movies.push($images.attr('src'))
         })
          
-        var $eachtitle = $('td.result_text a').each((i: any, title: any) => {
-
-            var $eachrating = $('td.result_text span[itemprop="ratingValue"]').each((i: any, rating: any) => {
-                var $eachid = $('td.result_text a').each((i: any, id: any) => {
-                    movies.push({
-                        title: title.children[0].data,
-                        imdbID: id.attribs.href.split('/')[2],
-                        // each rating: 
-                        rating: rating.children[0].data
-                        
-                    })
-                })
-                // movies.push(rating.children[0].data);
-            })
-            
-            // add keys to each movie object
-            
-        })
+       
         // lol making a video for my project ;0)))))
         // show imdb id for each movie
-  
+       
 
-        // get the rating for each movie
-        var $eachrating = $('td.result_text span[itemprop="ratingValue"]').each((i: any, rating: any) => {
-            // movies.push(rating.children[0].data);
-        })
-
-        return movies
+       
+        return movies;
+    
     })
     
     
