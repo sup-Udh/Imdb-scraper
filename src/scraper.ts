@@ -24,7 +24,7 @@ async function searchMovies(searchTerm : any){
         var $eachtitle = $('td.result_text a').each((i: any, title: any) => {
             movies.push(title.children[0].data);
         })
-
+        // lol making a video for my project ;0)))))
         // show imdb id for each movie
         var $eachid = $('td.result_text a').each((i: any, id: any) => {
             movies.push(id.attribs.href.split('/')[2]);

@@ -1,31 +1,19 @@
+const express = require("express"),
+  app = express();
 
-const express = require('express');
-const app = express();
-const scraper = require('../scraper');
-const port = process.env.PORT || 3000;
-app.get('/', (req: any, res: any) => {
-    res.json({
-        message: 'Welcome to the API'
-    });
+//setting view engine to ejs
+app.set("view engine", "ejs");
+
+//route for index page
+app.get("/", function (req: any, res: any) {
+  res.render("views/index");
 });
 
-app.get('/search/:title',  (req: any, res: any) => {
-    const title = req.params.title;
-     scraper.searchMovies(title)
-     .then((movies: any []) => {
-      //  console log the movies title
-      res.json(movies);
-          
-      })
+//route for magic page
+app.get("/magic", function (req: any, res: any) {
+  res.render("magic");
+});
 
-})
-
-app.get('/movie/:imdbID', (req: any, res: any) => {
-    scraper.getMovie(req.params.imdbID)
-    .then((movie: any) => {
-        res.json(movie);
-    })
-})
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-})
+app.listen(8080, function () {
+  console.log("Server is running on port 8080 ");
+});
